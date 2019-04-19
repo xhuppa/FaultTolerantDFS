@@ -1,13 +1,24 @@
 package edu.gmu.cs475;
 
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.cache.TreeCache;
+import org.apache.curator.framework.recipes.leader.LeaderLatch;
+import org.apache.curator.framework.recipes.leader.LeaderLatchListener;
+import org.apache.curator.framework.recipes.nodes.PersistentNode;
 import org.apache.curator.framework.state.ConnectionState;
+import org.apache.zookeeper.CreateMode;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class KVStore extends AbstractKVStore {
 
+	private LeaderLatch leaderLatch;
+	private PersistentNode empheralNode;
+	private ConcurrentHashMap <String, ReentrantReadWriteLock> lockMap = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<String, String> keyValueMap = new ConcurrentHashMap<>();
 
 	/**
 	 * This callback is invoked once your client has started up and published an RMI endpoint.
@@ -22,7 +33,30 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void initClient(String localClientHostname, int localClientPort) {
+		String empheralNodePath = ZK_MEMBERSHIP_NODE + "/" + getLocalConnectString();
+		String leaderPath = ZK_LEADER_NODE;
+		empheralNode = new PersistentNode(zk, CreateMode.EPHEMERAL, false, empheralNodePath, new byte[0]);
+		empheralNode.start();
+		leaderLatch = new LeaderLatch(zk, leaderPath, getLocalConnectString(), LeaderLatch.CloseMode.NOTIFY_LEADER);
+		try {
+			leaderLatch.start();
+		} catch (Exception e){ e.printStackTrace(); }
 
+		leaderLatch.addListener(new LeaderLatchListener() {
+			@Override
+			public void isLeader() {
+				try {
+					if(leaderLatch.getLeader().getId().equals(leaderPath)) {
+						System.out.println("Leader is : " + leaderLatch.getLeader().getId());
+					}
+				}catch (Exception e) { e.printStackTrace(); }
+			}
+
+			@Override
+			public void notLeader() {
+				System.out.println(leaderLatch.getId() + " is NOT the Leader");
+			}
+		});
 	}
 
 	/**

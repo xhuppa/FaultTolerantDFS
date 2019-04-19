@@ -15,6 +15,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class KVStore extends AbstractKVStore {
 
+	private boolean isConnected = false;
 	private LeaderLatch leaderLatch;
 	private PersistentNode empheralNode;
 	private ConcurrentHashMap <String, ReentrantReadWriteLock> lockMap = new ConcurrentHashMap<>();
@@ -35,26 +36,35 @@ public class KVStore extends AbstractKVStore {
 	public void initClient(String localClientHostname, int localClientPort) {
 		String empheralNodePath = ZK_MEMBERSHIP_NODE + "/" + getLocalConnectString();
 		String leaderPath = ZK_LEADER_NODE;
+		// Never Use Protection!
 		empheralNode = new PersistentNode(zk, CreateMode.EPHEMERAL, false, empheralNodePath, new byte[0]);
 		empheralNode.start();
+		// LeaderLatch.CloseMode.NOTIFY_LEADER notifies listeners if the latch closes
 		leaderLatch = new LeaderLatch(zk, leaderPath, getLocalConnectString(), LeaderLatch.CloseMode.NOTIFY_LEADER);
 		try {
+			// Let LeaderLatch work its magic on electing a leader
 			leaderLatch.start();
 		} catch (Exception e){ e.printStackTrace(); }
 
+		// Not sure how else to add a listener...
 		leaderLatch.addListener(new LeaderLatchListener() {
+			// Called when hasLeaderShip goes from false -> true
 			@Override
 			public void isLeader() {
 				try {
-					if(leaderLatch.getLeader().getId().equals(leaderPath)) {
+					if(!leaderLatch.hasLeadership()) {
 						System.out.println("Leader is : " + leaderLatch.getLeader().getId());
 					}
 				}catch (Exception e) { e.printStackTrace(); }
 			}
-
+			// Called when hasLeaderShip goes from true -> false
 			@Override
 			public void notLeader() {
-				System.out.println(leaderLatch.getId() + " is NOT the Leader");
+				try {
+					if (leaderLatch.hasLeadership()) {
+						System.out.println(leaderLatch.getLeader().getId() + " is NOT the Leader");
+					}
+				}catch (Exception e) { e.printStackTrace(); }
 			}
 		});
 	}
@@ -136,7 +146,15 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void stateChanged(CuratorFramework curatorFramework, ConnectionState connectionState) {
-
+		isConnected = connectionState.isConnected();
+		if(isConnected) {
+			System.out.println("Still Connected");
+		}
+		// Must figure out what to do if we are NOT connected...
+		else {
+			// Do stuff
+			System.out.println("Not Connected");
+		}
 	}
 
 	/**

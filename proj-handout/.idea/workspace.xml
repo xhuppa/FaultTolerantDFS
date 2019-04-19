@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aac32dd-250c-4eb6-a366-03044d2a5c49" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -21,12 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-              <folding>
-                <element signature="e#2336#2337#0" expanded="true" />
-                <element signature="e#2409#2410#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="348">
+              <caret line="74" column="17" lean-forward="true" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -48,6 +43,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="667">
               <caret line="109" column="13" lean-forward="true" selection-start-line="109" selection-start-column="13" selection-end-line="109" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -128,7 +132,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="239" />
     <option name="y" value="127" />
     <option name="width" value="1681" />
@@ -203,6 +207,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555468973804" />
@@ -222,7 +227,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.P1ZKTests">
+  <component name="RunManager" selected="JUnit.P2ReplicationTests">
     <configuration name="P1ZKTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="proj-handout" />
       <extension name="coverage">
@@ -238,6 +243,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="P2ReplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-handout" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.gmu.cs475.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.gmu.cs475.test" />
+      <option name="MAIN_CLASS_NAME" value="edu.gmu.cs475.test.P2ReplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="kvstore" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="edu.gmu.cs475.internal.Main" />
@@ -247,6 +267,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.P2ReplicationTests" />
         <item itemvalue="JUnit.P1ZKTests" />
       </list>
     </recent_temporary>
@@ -276,6 +297,18 @@
     <history-entry file="P1ZKTests - 2019.04.19 at 13h 16m 49s.xml">
       <configuration name="P1ZKTests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="P1ZKTests - 2019.04.19 at 13h 24m 46s.xml">
+      <configuration name="P1ZKTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P1ZKTests - 2019.04.19 at 14h 00m 32s.xml">
+      <configuration name="P1ZKTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P1ZKTests - 2019.04.19 at 14h 01m 37s.xml">
+      <configuration name="P1ZKTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P2ReplicationTests - 2019.04.19 at 14h 06m 25s.xml">
+      <configuration name="P2ReplicationTests" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="3390000" />
@@ -291,7 +324,7 @@
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Messages" weight="0.32955304" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3299285" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32955304" />
@@ -300,7 +333,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32955304" />
       <window_info anchor="bottom" id="Docker" order="9" />
       <window_info anchor="bottom" id="CheckStyle" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -385,13 +418,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="848">
@@ -406,14 +432,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-recipes/4.0.1/curator-recipes-4.0.1.jar!/org/apache/curator/framework/recipes/leader/LeaderLatchListener.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-          <folding>
-            <element signature="e#2336#2337#0" expanded="true" />
-            <element signature="e#2409#2410#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="348">
+          <caret line="74" column="17" lean-forward="true" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
         </state>
       </provider>
     </entry>

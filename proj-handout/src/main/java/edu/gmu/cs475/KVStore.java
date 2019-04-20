@@ -1,5 +1,6 @@
 package edu.gmu.cs475;
 
+import edu.gmu.cs475.internal.IKVStore;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.TreeCache;
 import org.apache.curator.framework.recipes.leader.LeaderLatch;
@@ -10,16 +11,18 @@ import org.apache.zookeeper.CreateMode;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class KVStore extends AbstractKVStore {
 
-	private boolean isConnected = false;
+	private boolean isConnected = true;
 	private LeaderLatch leaderLatch;
-	private PersistentNode empheralNode;
+	private PersistentNode ephemeralNode;
 	private ConcurrentHashMap <String, ReentrantReadWriteLock> lockMap = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<String, String> keyValueMap = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<String, ArrayList<String>> clientMap = new ConcurrentHashMap<>();
 
 	/**
 	 * This callback is invoked once your client has started up and published an RMI endpoint.
@@ -34,11 +37,11 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void initClient(String localClientHostname, int localClientPort) {
-		String empheralNodePath = ZK_MEMBERSHIP_NODE + "/" + getLocalConnectString();
+		String ephemeralNodePath = ZK_MEMBERSHIP_NODE + "/" + getLocalConnectString();
 		String leaderPath = ZK_LEADER_NODE;
 		// Never Use Protection!
-		empheralNode = new PersistentNode(zk, CreateMode.EPHEMERAL, false, empheralNodePath, new byte[0]);
-		empheralNode.start();
+		ephemeralNode = new PersistentNode(zk, CreateMode.EPHEMERAL, false, ephemeralNodePath, new byte[0]);
+		ephemeralNode.start();
 		// LeaderLatch.CloseMode.NOTIFY_LEADER notifies listeners if the latch closes
 		leaderLatch = new LeaderLatch(zk, leaderPath, getLocalConnectString(), LeaderLatch.CloseMode.NOTIFY_LEADER);
 		try {
@@ -78,7 +81,30 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public String getValue(String key) throws IOException {
-		return null;
+		synchronized (key) {
+			if (!isConnected) {
+				throw new IOException();
+			}
+			try {
+				// if the client already holds this key and value, return it
+				if (keyValueMap.get(key) != null) {
+					return keyValueMap.get(key);
+				}
+				IKVStore leaderID = connectToKVStore(leaderLatch.getLeader().getId());
+				// See if leader has the value of this key. getLocalConnectString() is the client making the request
+				String value = leaderID.getValue(key, getLocalConnectString());
+				// if value is null, return null but don't store it in map
+				if (value == null) {
+					System.out.println("Null Value");
+					return null;
+				}
+				// Value is not null, store in map
+				keyValueMap.put(key, value);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return keyValueMap.get(key);
+		}
 	}
 
 	/**
@@ -90,7 +116,18 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void setValue(String key, String value) throws IOException {
-
+		synchronized (key) {
+			if (!isConnected) {
+				throw new IOException();
+			}
+			try {
+				IKVStore leaderID = connectToKVStore(leaderLatch.getLeader().getId());
+				leaderID.setValue(key, value, getLocalConnectString());
+				keyValueMap.put(key, value);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -106,7 +143,21 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public String getValue(String key, String fromID) throws RemoteException {
-		return null;
+		// Store a lock with this key if it doesn't have one
+		lockMap.computeIfAbsent(key, e -> new ReentrantReadWriteLock());
+		lockMap.get(key).readLock().lock();
+		try {
+			try {
+				if(keyValueMap.get(key) != null) {
+					clientMap.computeIfAbsent(key, e-> new ArrayList<>());
+					// Cache the value
+					clientMap.get(key).add(fromID);
+				}
+			} catch (Exception e) { e.printStackTrace(); }
+			return keyValueMap.get(key);
+		} finally {
+			lockMap.get(key).readLock().unlock();
+		}
 	}
 
 	/**
@@ -122,7 +173,16 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void setValue(String key, String value, String fromID) throws IOException {
-
+		// Store a lock with this key if it doesn't have one
+		lockMap.computeIfAbsent(key, e -> new ReentrantReadWriteLock());
+		lockMap.get(key).writeLock().lock();
+		try {
+			keyValueMap.put(key, value);
+			clientMap.computeIfAbsent(key, e -> new ArrayList<>());
+			clientMap.get(key).add(fromID);
+		} finally {
+			lockMap.get(key).writeLock().unlock();
+		}
 	}
 
 	/**
@@ -136,7 +196,7 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void invalidateKey(String key) throws RemoteException {
-
+		keyValueMap.remove(key);
 	}
 
 	/**
@@ -163,7 +223,13 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	protected void _cleanup() {
-
+		// If still connected, close resources
+		if(isConnected) {
+			try {
+				leaderLatch.close();
+				ephemeralNode.close();
+			} catch (Exception e) { e.printStackTrace(); }
+		}
 	}
 }
 

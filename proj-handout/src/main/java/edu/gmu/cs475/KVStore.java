@@ -192,27 +192,25 @@ public class KVStore extends AbstractKVStore {
 		// Store a lock with this key if it doesn't have one
 		lockMap.computeIfAbsent(key, e -> new ReentrantReadWriteLock());
 		lockMap.get(key).writeLock().lock();
-		ChildData childData = treeCache.getCurrentData(ZK_MEMBERSHIP_NODE);
-		System.out.println("Child Data : "+childData);
-
 		try {
-			try {
-				System.out.println("Key : "+key+ " Value : "+value);
-				// check if this key belongs to a client or is null
-				if (clientMap.get(key) != null) {
-						System.out.println("fromID "+fromID);
-						System.out.println("CL MAP "+clientMap.get(key));
-						// if current data is not null then remove it from cache
-						if(childData != null) {
-							// invalidate this client
-							connectToKVStore(fromID).invalidateKey(key);
-						}
+			// get all the connected children
+			Map<String, ChildData> children = this.treeCache.getCurrentChildren(ZK_MEMBERSHIP_NODE);
+			if(this.clientMap.get(key) != null) {
+				// get all the clients that are supposed to be connected and have the key cached
+				for(String c: this.clientMap.get(key)) {
+					// if the followers exist in the tree cahce that means they are connected
+					if(children.containsKey(c)) {
+						connectToKVStore(c).invalidateKey(key);
+					}
 				}
-			} catch (Exception e){ e.printStackTrace(); }
-			keyValueMap.put(key, value);
-			// Adding the emptied list of clients, with this key
-			clientMap.computeIfAbsent(key, e -> new ArrayList<>());
-			clientMap.get(key).add(fromID);
+			}
+			keyValueMap.put(key,value);
+			// add the cache
+			this.clientMap.put(key,new ArrayList<String>());
+			this.clientMap.get(key).add(fromID);
+		} catch (Exception e) {
+			System.out.println("Exception in set value");
+			e.printStackTrace();
 		} finally {
 			lockMap.get(key).writeLock().unlock();
 		}

@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aac32dd-250c-4eb6-a366-03044d2a5c49" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,11 +17,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="49" column="28" selection-start-line="49" selection-end-line="50" />
+            <state relative-caret-position="434">
+              <caret line="209" column="48" selection-start-line="209" selection-start-column="48" selection-end-line="209" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -31,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P1ZKTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
+            <state relative-caret-position="204">
               <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -43,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/AbstractKVStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2639">
-              <caret line="108" column="33" lean-forward="true" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
+            <state relative-caret-position="1547">
+              <caret line="108" column="33" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -52,7 +59,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
+            <state relative-caret-position="8619">
               <caret line="514" column="21" selection-start-line="514" selection-start-column="21" selection-end-line="514" selection-end-column="21" />
             </state>
           </provider>
@@ -80,11 +87,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="302" />
-    <option name="y" value="39" />
-    <option name="width" value="2871" />
-    <option name="height" value="1639" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="width" value="820" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -92,8 +98,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -152,13 +156,15 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555468973804" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556387658737" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -232,19 +238,11 @@
       <updated>1555467420021</updated>
       <workItem from="1555467421404" duration="821000" />
       <workItem from="1555510939054" duration="2569000" />
+      <workItem from="1556386184782" duration="1713000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 42m 20s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 43m 06s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 43m 28s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 43m 51s.xml">
       <configuration name="P2ReplicationTests" configurationId="JUnit" />
     </history-entry>
@@ -266,15 +264,24 @@
     <history-entry file="P2ReplicationTests - 2019.04.27 at 13h 04m 16s.xml">
       <configuration name="P2ReplicationTests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="P1ZKTests - 2019.04.27 at 13h 31m 13s.xml">
+      <configuration name="P1ZKTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P2ReplicationTests - 2019.04.27 at 13h 32m 39s.xml">
+      <configuration name="P2ReplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P2ReplicationTests - 2019.04.27 at 13h 54m 40s.xml">
+      <configuration name="P2ReplicationTests" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3390000" />
+    <option name="totallyTimeSpent" value="5103000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="302" y="39" width="2871" height="1639" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16025871" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33557048" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -283,14 +290,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3299285" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38455936" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.388102" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32955304" />
-      <window_info anchor="bottom" id="Docker" order="9" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="CheckStyle" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
@@ -351,13 +358,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="848">
@@ -380,23 +380,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/JavaFX.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="514" column="21" selection-start-line="514" selection-start-column="21" selection-end-line="514" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/AbstractKVStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2639">
-          <caret line="108" column="33" lean-forward="true" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
+        <state relative-caret-position="434">
+          <caret line="209" column="48" selection-start-line="209" selection-start-column="48" selection-end-line="209" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P1ZKTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
+        <state relative-caret-position="204">
           <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -404,10 +397,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/AbstractKVStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="49" column="28" selection-start-line="49" selection-end-line="50" />
+        <state relative-caret-position="1547">
+          <caret line="108" column="33" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8619">
+          <caret line="514" column="21" selection-start-line="514" selection-start-column="21" selection-end-line="514" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>

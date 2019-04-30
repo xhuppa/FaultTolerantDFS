@@ -190,23 +190,23 @@ public class KVStore extends AbstractKVStore {
 		lockMap.get(key).writeLock().lock();
 		try {
 			try {
-				Map<String, ChildData> children = this.treeCache.getCurrentChildren(ZK_MEMBERSHIP_NODE);
-				if(this.clientMap.get(key) != null) {
-					// get all the clients that are supposed to be connected and have the key cached
-					for (String c : this.clientMap.get(key)) {
-						// if the followers exist in the tree cache that means they are connected
-						if (children.containsKey(c)) {
-							connectToKVStore(c).invalidateKey(key);
-						}
+			// get all the connected children
+			Map<String, ChildData> children = this.treeCache.getCurrentChildren(ZK_MEMBERSHIP_NODE);
+			if(this.clientMap.get(key) != null) {
+				// get all the clients that are supposed to be connected and have the key cached
+				for(String c: this.clientMap.get(key)) {
+					// if the followers exist in the tree cahce that means they are connected
+					if(children.containsKey(c)) {
+						connectToKVStore(c).invalidateKey(key);
 					}
 				}
+			}
 			keyValueMap.put(key,value);
 			// add the cache
-			clientMap.computeIfAbsent(key, e -> new ArrayList<>());
+			this.clientMap.put(key,new ArrayList<String>());
 			this.clientMap.get(key).add(fromID);
-			} catch (Exception e) {
-				//System.out.println("Exception in set value");
-				throw new IOException();
+		} catch (Exception e) {
+				System.out.println("Exception in set value");
 			}
 		} finally {
 			lockMap.get(key).writeLock().unlock();

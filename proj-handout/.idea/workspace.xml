@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aac32dd-250c-4eb6-a366-03044d2a5c49" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/gmu/cs475/KVStore.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,17 +23,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="49" column="28" selection-start-line="49" selection-end-line="50" />
+            <state relative-caret-position="384">
+              <caret line="265" column="67" lean-forward="true" selection-start-line="265" selection-start-column="67" selection-end-line="265" selection-end-column="67" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P1ZKTests.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+            <state relative-caret-position="377">
+              <caret line="143" column="20" lean-forward="true" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,17 +47,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/AbstractKVStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2639">
-              <caret line="108" column="33" lean-forward="true" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
+            <state relative-caret-position="232">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/Base475Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="514" column="21" selection-start-line="514" selection-start-column="21" selection-end-line="514" selection-end-column="21" />
+            <state relative-caret-position="377">
+              <caret line="109" column="24" lean-forward="true" selection-start-line="109" selection-start-column="24" selection-end-line="109" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,14 +83,15 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/Base475Test.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P1ZKTests.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="302" />
+    <option name="x" value="5" />
     <option name="y" value="39" />
-    <option name="width" value="2871" />
+    <option name="width" value="2674" />
     <option name="height" value="1639" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -92,8 +100,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -133,21 +141,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="proj-handout" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proj-handout" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proj-handout" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proj-handout" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -162,6 +155,10 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -206,6 +203,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="P3FaultToleranceTests.testCantWriteWhileDisconnectedFromZK" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-handout" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.gmu.cs475.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.gmu.cs475.test" />
+      <option name="MAIN_CLASS_NAME" value="edu.gmu.cs475.test.P3FaultToleranceTests" />
+      <option name="METHOD_NAME" value="testCantWriteWhileDisconnectedFromZK" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="kvstore" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="edu.gmu.cs475.internal.Main" />
@@ -216,6 +229,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.P2ReplicationTests" />
+        <item itemvalue="JUnit.P3FaultToleranceTests.testCantWriteWhileDisconnectedFromZK" />
         <item itemvalue="JUnit.P1ZKTests" />
       </list>
     </recent_temporary>
@@ -236,34 +250,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 42m 20s.xml">
+    <history-entry file="P3FaultToleranceTests_testCantWriteWhileDisconnectedFromZK - 2019.04.29 at 12h 46m 54s.xml">
+      <configuration name="P3FaultToleranceTests.testCantWriteWhileDisconnectedFromZK" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P2ReplicationTests - 2019.04.30 at 12h 38m 09s.xml">
       <configuration name="P2ReplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 43m 06s.xml">
+    <history-entry file="P2ReplicationTests - 2019.04.30 at 12h 47m 44s.xml">
       <configuration name="P2ReplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 43m 28s.xml">
+    <history-entry file="P2ReplicationTests - 2019.04.30 at 12h 56m 54s.xml">
       <configuration name="P2ReplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 43m 51s.xml">
+    <history-entry file="P3FaultToleranceTests_testCantWriteWhileDisconnectedFromZK - 2019.04.30 at 12h 57m 37s.xml">
+      <configuration name="P3FaultToleranceTests.testCantWriteWhileDisconnectedFromZK" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P3FaultToleranceTests_testCantWriteWhileDisconnectedFromZK - 2019.04.30 at 12h 58m 13s.xml">
+      <configuration name="P3FaultToleranceTests.testCantWriteWhileDisconnectedFromZK" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P3FaultToleranceTests_testCantWriteWhileDisconnectedFromZK - 2019.04.30 at 12h 58m 23s.xml">
+      <configuration name="P3FaultToleranceTests.testCantWriteWhileDisconnectedFromZK" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P3FaultToleranceTests_testCantWriteWhileDisconnectedFromZK - 2019.04.30 at 12h 58m 39s.xml">
+      <configuration name="P3FaultToleranceTests.testCantWriteWhileDisconnectedFromZK" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P2ReplicationTests - 2019.04.30 at 12h 59m 17s.xml">
       <configuration name="P2ReplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 44m 36s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 46m 10s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 52m 17s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 12h 53m 27s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 13h 01m 57s.xml">
-      <configuration name="P2ReplicationTests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="P2ReplicationTests - 2019.04.27 at 13h 04m 16s.xml">
+    <history-entry file="P2ReplicationTests - 2019.04.30 at 13h 59m 17s.xml">
       <configuration name="P2ReplicationTests" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -271,10 +285,10 @@
     <option name="totallyTimeSpent" value="3390000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="302" y="39" width="2871" height="1639" extended-state="0" />
+    <frame x="5" y="39" width="2674" height="1639" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16025871" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10247487" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -283,13 +297,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3299285" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38455936" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37363437" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32955304" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3292061" />
       <window_info anchor="bottom" id="Docker" order="9" />
       <window_info anchor="bottom" id="CheckStyle" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -351,24 +365,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="848">
           <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/Base475Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -380,43 +380,139 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/JavaFX.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="514" column="21" selection-start-line="514" selection-start-column="21" selection-end-line="514" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/AbstractKVStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2639">
-          <caret line="108" column="33" lean-forward="true" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P1ZKTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        <state relative-caret-position="290">
+          <caret line="13" column="36" lean-forward="true" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/Base475Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="109" column="24" lean-forward="true" selection-start-line="109" selection-start-column="24" selection-end-line="109" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P3FaultToleranceTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="65" column="73" lean-forward="true" selection-start-line="65" selection-start-column="73" selection-end-line="65" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/gmu/cs475/test/P2ReplicationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="143" column="20" lean-forward="true" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/AbstractKVStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/gmu/cs475/KVStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="49" column="28" selection-start-line="49" selection-end-line="50" />
+        <state relative-caret-position="384">
+          <caret line="265" column="67" lean-forward="true" selection-start-line="265" selection-start-column="67" selection-end-line="265" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>proj-handout</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ch.qos.logback:logback-classic:1.1.11</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

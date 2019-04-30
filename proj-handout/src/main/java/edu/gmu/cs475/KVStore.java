@@ -49,6 +49,7 @@ public class KVStore extends AbstractKVStore {
 
 		// Never Use Protection!
 		ephemeralNode = new PersistentNode(zk, CreateMode.EPHEMERAL, false, ephemeralNodePath, new byte[0]);
+		ephemeralNode.start();
 		// LeaderLatch.CloseMode.NOTIFY_LEADER notifies listeners if the latch closes
 		leaderLatch = new LeaderLatch(zk, leaderPath, getLocalConnectString(), LeaderLatch.CloseMode.NOTIFY_LEADER);
 		// Tree cache for the zk client that keeps all data from all children of the membership path
@@ -56,7 +57,6 @@ public class KVStore extends AbstractKVStore {
 		try {
 			// Let LeaderLatch work its magic on electing a leader
 			leaderLatch.start();
-			ephemeralNode.start();
 			treeCache.start();
 
 		} catch (Exception e){ e.printStackTrace(); }
@@ -91,31 +91,31 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public String getValue(String key) throws IOException {
-		//synchronized (key) {
-			if (!isConnected) {
-				throw new IOException();
+		if (!isConnected) {
+			throw new IOException();
+		}
+		String value = null;
+		try {
+			// if the client already holds this key and value, return it
+			if (keyValueMap.get(key) != null) {
+				return keyValueMap.get(key);
 			}
-			String value = null;
-			try {
-				// if the client already holds this key and value, return it
-				if (keyValueMap.get(key) != null) {
-					return keyValueMap.get(key);
-				}
-				IKVStore leaderID = connectToKVStore(leaderLatch.getLeader().getId());
-				// See if leader has the value of this key. getLocalConnectString() is the client making the request
-				value = leaderID.getValue(key, getLocalConnectString());
-				// if value is null, return null but don't store it in map
-				if (value == null) {
-					System.out.println("Null Value");
-					return null;
-				}
-				// Value is not null, store in map
-				keyValueMap.put(key, value);
-			} catch (Exception e) {
-				e.printStackTrace();
+			IKVStore leaderID = connectToKVStore(leaderLatch.getLeader().getId());
+			// See if leader has the value of this key. getLocalConnectString() is the client making the request
+			value = leaderID.getValue(key, getLocalConnectString());
+			// if value is null, return null but don't store it in map
+			if (value == null) {
+				System.out.println("Null Value");
+				return null;
 			}
-			//return value;
-			return keyValueMap.get(key);
+			// Value is not null, store in map
+			System.out.println("1st Get value key ");
+			keyValueMap.put(key, value);
+		} catch (Exception e) {
+			throw new IOException();
+		}
+		return value;
+			//return keyValueMap.get(key);
 	}
 
 	/**
@@ -127,23 +127,16 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void setValue(String key, String value) throws IOException {
-		//synchronized (key) {
-		//lockMap.computeIfAbsent(key, e -> new ReentrantReadWriteLock());
-		//lockMap.get(key).writeLock().lock();
-	//	try {
-			if (!isConnected) {
-				throw new IOException();
-			}
-			try {
-				IKVStore leaderID = connectToKVStore(leaderLatch.getLeader().getId());
-				leaderID.setValue(key, value, getLocalConnectString());
-				keyValueMap.put(key, value);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-	//	} finally {
-	//		lockMap.get(key).writeLock().unlock();
-	//	}
+		if (!isConnected) {
+			throw new IOException();
+		}
+		try {
+			IKVStore leaderID = connectToKVStore(leaderLatch.getLeader().getId());
+			leaderID.setValue(key, value, getLocalConnectString());
+			keyValueMap.put(key, value);
+		} catch (Exception e) {
+			throw new IOException();
+		}
 	}
 
 	/**
@@ -167,9 +160,12 @@ public class KVStore extends AbstractKVStore {
 				if(keyValueMap.get(key) != null) {
 					clientMap.computeIfAbsent(key, e-> new ArrayList<>());
 					// Cache the client
+					System.out.println("Get value key id, if");
 					clientMap.get(key).add(fromID);
 				}
-			} catch (Exception e) { e.printStackTrace(); }
+			} catch (Exception e) {
+				throw new RemoteException();
+			}
 			return keyValueMap.get(key);
 		} finally {
 			lockMap.get(key).readLock().unlock();
@@ -192,27 +188,26 @@ public class KVStore extends AbstractKVStore {
 		// Store a lock with this key if it doesn't have one
 		lockMap.computeIfAbsent(key, e -> new ReentrantReadWriteLock());
 		lockMap.get(key).writeLock().lock();
-		ChildData childData = treeCache.getCurrentData(ZK_MEMBERSHIP_NODE);
-		System.out.println("Child Data : "+childData);
-
 		try {
 			try {
-				System.out.println("Key : "+key+ " Value : "+value);
-				// check if this key belongs to a client or is null
-				if (clientMap.get(key) != null) {
-						System.out.println("fromID "+fromID);
-						System.out.println("CL MAP "+clientMap.get(key));
-						// if current data is not null then remove it from cache
-						if(childData != null) {
-							// invalidate this client
-							connectToKVStore(fromID).invalidateKey(key);
+				Map<String, ChildData> children = this.treeCache.getCurrentChildren(ZK_MEMBERSHIP_NODE);
+				if(this.clientMap.get(key) != null) {
+					// get all the clients that are supposed to be connected and have the key cached
+					for (String c : this.clientMap.get(key)) {
+						// if the followers exist in the tree cache that means they are connected
+						if (children.containsKey(c)) {
+							connectToKVStore(c).invalidateKey(key);
 						}
+					}
 				}
-			} catch (Exception e){ e.printStackTrace(); }
-			keyValueMap.put(key, value);
-			// Adding the emptied list of clients, with this key
+			keyValueMap.put(key,value);
+			// add the cache
 			clientMap.computeIfAbsent(key, e -> new ArrayList<>());
-			clientMap.get(key).add(fromID);
+			this.clientMap.get(key).add(fromID);
+			} catch (Exception e) {
+				//System.out.println("Exception in set value");
+				throw new IOException();
+			}
 		} finally {
 			lockMap.get(key).writeLock().unlock();
 		}
@@ -229,13 +224,8 @@ public class KVStore extends AbstractKVStore {
 	 */
 	@Override
 	public void invalidateKey(String key) throws RemoteException {
-		//lockMap.get(key).writeLock().lock();
-		//try {
+		System.out.println("Invalidate called");
 		keyValueMap.remove(key);
-		//}finally {
-		//	lockMap.get(key).writeLock().unlock();
-		//}
-		//clientMap.remove(key);
 	}
 
 	/**
@@ -247,12 +237,35 @@ public class KVStore extends AbstractKVStore {
 	public void stateChanged(CuratorFramework curatorFramework, ConnectionState connectionState) {
 		isConnected = connectionState.isConnected();
 		if(isConnected) {
-			System.out.println("Still Connected");
+			//System.out.println("Still Connected");
 		}
-		// Must figure out what to do if we are NOT connected...
 		else {
-			// Do stuff
-			System.out.println("Not Connected");
+			if(connectionState == ConnectionState.LOST) {
+				System.out.println("Connection is Lost");
+				keyValueMap = null;
+				clientMap = null;
+				lockMap = null;
+			}
+			else if(connectionState == ConnectionState.SUSPENDED) {
+				// wait?
+				System.out.println("Connection is Suspended");
+				keyValueMap = null;
+				clientMap = null;
+				lockMap = null;
+			}
+			else if(connectionState == ConnectionState.RECONNECTED) {
+				System.out.println("Connection is Reconnected");
+				try {
+					if(zk.getZookeeperClient() != null && leaderLatch.getParticipants().size() > 0) {
+						keyValueMap = new ConcurrentHashMap<>();
+						lockMap = new ConcurrentHashMap<>();
+						clientMap = new ConcurrentHashMap<>();
+					}
+				} catch (Exception e) { e.printStackTrace(); }
+			}
+			else if(connectionState == ConnectionState.READ_ONLY) {
+				System.out.println("Connection is Read Only ");
+			}
 		}
 	}
 
@@ -264,11 +277,18 @@ public class KVStore extends AbstractKVStore {
 	protected void _cleanup() {
 		// If still connected, close resources
 		if(isConnected) {
+			System.out.println("Cleanup ");
 			try {
 				treeCache.close();
-				leaderLatch.close();
+			} catch (Exception e) { System.out.println("Failed to close Tree Cache"); }
+			try {
+				if(leaderLatch.getState() == LeaderLatch.State.STARTED) {
+					leaderLatch.close();
+				}
+			} catch (Exception e) { System.out.println("Failed to close Leader Latch"); }
+			try {
 				ephemeralNode.close();
-			} catch (Exception e) { e.printStackTrace(); }
+			} catch (Exception e) { System.out.println("Failed to close Ephemeral Node"); }
 		}
 	}
 }

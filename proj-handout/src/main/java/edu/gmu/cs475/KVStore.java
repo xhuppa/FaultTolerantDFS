@@ -112,7 +112,7 @@ public class KVStore extends AbstractKVStore {
 			System.out.println("1st Get value key ");
 			keyValueMap.put(key, value);
 		} catch (Exception e) {
-			throw new IOException();
+			e.printStackTrace();
 		}
 		return value;
 			//return keyValueMap.get(key);
@@ -135,7 +135,7 @@ public class KVStore extends AbstractKVStore {
 			leaderID.setValue(key, value, getLocalConnectString());
 			keyValueMap.put(key, value);
 		} catch (Exception e) {
-			throw new IOException();
+			e.printStackTrace();
 		}
 	}
 
@@ -164,7 +164,7 @@ public class KVStore extends AbstractKVStore {
 					clientMap.get(key).add(fromID);
 				}
 			} catch (Exception e) {
-				throw new RemoteException();
+				e.printStackTrace();
 			}
 			return keyValueMap.get(key);
 		} finally {
@@ -203,10 +203,11 @@ public class KVStore extends AbstractKVStore {
 			}
 			keyValueMap.put(key,value);
 			// add the cache
-			this.clientMap.put(key,new ArrayList<String>());
+			this.clientMap.put(key,new ArrayList<>());
 			this.clientMap.get(key).add(fromID);
 		} catch (Exception e) {
 				System.out.println("Exception in set value");
+				e.printStackTrace();
 			}
 		} finally {
 			lockMap.get(key).writeLock().unlock();
@@ -237,7 +238,6 @@ public class KVStore extends AbstractKVStore {
 	public void stateChanged(CuratorFramework curatorFramework, ConnectionState connectionState) {
 		isConnected = connectionState.isConnected();
 		if(isConnected) {
-			//System.out.println("Still Connected");
 		}
 		else {
 			if(connectionState == ConnectionState.LOST) {

@@ -30,6 +30,7 @@ public class KVStore extends AbstractKVStore {
 	private ConcurrentHashMap<String, ReentrantReadWriteLock> lockMap = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<String, String> keyValueMap = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<String, ArrayList<String>> clientMap = new ConcurrentHashMap<>();
+	Participant leader;
 
 	/**
 	 * This callback is invoked once your client has started up and published an RMI endpoint.
@@ -80,6 +81,12 @@ public class KVStore extends AbstractKVStore {
 				}catch (Exception e) { e.printStackTrace(); }
 			}
 		});
+		try {
+			leader = leaderLatch.getLeader();
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -112,6 +119,7 @@ public class KVStore extends AbstractKVStore {
 			System.out.println("1st Get value key ");
 			keyValueMap.put(key, value);
 		} catch (Exception e) {
+			System.out.println("empty maps");
 			e.printStackTrace();
 		}
 		return value;
@@ -186,6 +194,11 @@ public class KVStore extends AbstractKVStore {
 	@Override
 	public void setValue(String key, String value, String fromID) throws IOException {
 		// Store a lock with this key if it doesn't have one
+		try {
+			System.out.println("id in set is " + leaderLatch.getLeader().getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		lockMap.computeIfAbsent(key, e -> new ReentrantReadWriteLock());
 		lockMap.get(key).writeLock().lock();
 		try {
@@ -199,6 +212,7 @@ public class KVStore extends AbstractKVStore {
 					if(children.containsKey(c)) {
 						connectToKVStore(c).invalidateKey(key);
 					}
+
 				}
 			}
 			keyValueMap.put(key,value);
@@ -237,37 +251,45 @@ public class KVStore extends AbstractKVStore {
 	@Override
 	public void stateChanged(CuratorFramework curatorFramework, ConnectionState connectionState) {
 		isConnected = connectionState.isConnected();
-		if(isConnected) {
-		}
-		else {
 			if(connectionState == ConnectionState.LOST) {
 				System.out.println("Connection is Lost");
-				keyValueMap = null;
-				clientMap = null;
-				lockMap = null;
+				isConnected=false;
+
 			}
 			else if(connectionState == ConnectionState.SUSPENDED) {
-				// wait?
 				System.out.println("Connection is Suspended");
-				keyValueMap = null;
-				clientMap = null;
-				lockMap = null;
+				isConnected=false;
+
 			}
 			else if(connectionState == ConnectionState.RECONNECTED) {
 				System.out.println("Connection is Reconnected");
+				System.out.println("inside RECCONECTED");
 				try {
-					if(zk.getZookeeperClient() != null && leaderLatch.getParticipants().size() > 0) {
-						keyValueMap = new ConcurrentHashMap<>();
-						lockMap = new ConcurrentHashMap<>();
-						clientMap = new ConcurrentHashMap<>();
+					System.out.println("id is " + leaderLatch.getLeader().getId());
+					System.out.println("local string is " + getLocalConnectString());
+					System.out.println("inside the try catch");
+					while(leaderLatch.getId().equals(""))
+					{
+						//Thread.sleep(100);
+						System.out.println("inside while");
+
 					}
-				} catch (Exception e) { e.printStackTrace(); }
+					if(!(leaderLatch.getLeader().getId().equals(getLocalConnectString()))) { /// leaderLatch.getId() == ""
+						System.out.println("nulling out values");
+							keyValueMap = new ConcurrentHashMap<>();
+							lockMap = new ConcurrentHashMap<>();
+							clientMap = new ConcurrentHashMap<>();
+
+					}
+				} catch (Exception e) {
+					System.out.println("exception");
+					//e.printStackTrace();
+				}
 			}
 			else if(connectionState == ConnectionState.READ_ONLY) {
 				System.out.println("Connection is Read Only ");
 			}
 		}
-	}
 
 	/**
 	 * Release any ZooKeeper resources that you setup here
